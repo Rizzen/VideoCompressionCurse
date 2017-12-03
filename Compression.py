@@ -9,7 +9,7 @@ import numpy as np
 class Video(object):
 
     def __init__(self):
-        self.video = cv2.VideoCapture('%PATH_TO_FILE%')
+        self.video = cv2.VideoCapture('E:\PyProjects\Compression\\123.webm')
 
     def __del__(self):
         self.video.release()
@@ -22,10 +22,9 @@ class Video(object):
         return None, False
 
 
-# using requests to capture video via Android smartphone with IPWebcam
+# using requests to capture video via smartphone with IPWebcam
 class IPCamVideo(object):
     def __init__(self):
-        # URL of device
         self.url = 'http://192.168.100.7:8080/shot.jpg'
 
     def get_frame(self):
