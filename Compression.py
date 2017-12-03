@@ -28,17 +28,9 @@ class IPCamVideo(object):
         self.url = 'http://192.168.100.7:8080/shot.jpg'
 
     def get_frame(self):
-        responce = requests.get(self.url, stream=True)
+        response = requests.get(self.url, stream=True)
 
-        return responce.content, True
-
-
-app = Flask(__name__)
-
-
-@app.route('/')
-def index():
-    return 'Index Page'
+        return response.content, True
 
 
 def gen(video):
@@ -47,14 +39,3 @@ def gen(video):
         if success:
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-
-
-# http://127.0.0.1:5000/video_feed
-@app.route('/video_feed')
-def video_feed():
-    res = Response(gen(IPCamVideo()), mimetype='multipart/x-mixed-replace; boundary=frame')
-    return res
-
-
-if __name__ == '__main__':
-    app.run()
