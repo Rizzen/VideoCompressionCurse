@@ -65,10 +65,6 @@ def cap_and_write(writer):
     writer.write_video()
 
 
-def just_cap():
-    VideoWriter.write()
-
-
 def comp_ffmpy():
     ff = ffmpy.FFmpeg(
         inputs={'E:\PyProjects\Resources\\test.mov': None},
