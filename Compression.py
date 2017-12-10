@@ -2,6 +2,7 @@ import cv2
 import time
 import requests
 import VideoWriter
+import ffmpy
 
 
 # Opens video and shows it in browser
@@ -33,8 +34,9 @@ class IPCamVideo(object):
 
     def get_frame(self):
         response = requests.get(self.url, stream=True)
-
-        return response.content, True
+        frame = response.content
+        ret, jpeg = cv2.imencode('.jpg', frame)
+        return jpeg.tobytes(), True
 
 
 class CompressedVideoWriter(object):
@@ -62,5 +64,14 @@ def gen(video):
 def cap_and_write(writer):
     writer.write_video()
 
+
 def just_cap():
     VideoWriter.write()
+
+
+def comp_ffmpy():
+    ff = ffmpy.FFmpeg(
+        inputs={'E:\PyProjects\Resources\\test.mov': None},
+        outputs={'output.avi': None}
+    )
+    ff.run()

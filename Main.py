@@ -17,6 +17,14 @@ def video_feed():
     return res
 
 
+# http://127.0.0.1:5000/camera
+@app.route('/camera')
+def camera():
+    res = Response(compression.gen(compression.IPCamVideo()),
+                   mimetype='multipart/x-mixed-replace; boundary=frame')
+    return res
+
+
 # http://127.0.0.1:5000/video_write
 @app.route('/video_write')
 def video_write():
@@ -28,6 +36,13 @@ def video_write():
 @app.route('/just_write')
 def just_write():
     compression.just_cap()
+    return 'Done!'
+
+
+# http://127.0.0.1:5000/ffmpy
+@app.route('/ffmpy')
+def ffmpy():
+    compression.comp_ffmpy()
     return 'Done!'
 
 
