@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 
 class Writer(object):
@@ -8,7 +7,6 @@ class Writer(object):
         # 'M', 'J', 'P', 'G'
         # D', 'I', 'V', 'X'
         self.fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-        #
         self.out = cv2.VideoWriter('output.avi', self.fourcc, 25.0, (720, 576))
 
     def __del__(self):

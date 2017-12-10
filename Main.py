@@ -32,13 +32,6 @@ def video_write():
     return 'Done!'
 
 
-# http://127.0.0.1:5000/just_write
-@app.route('/just_write')
-def just_write():
-    compression.just_cap()
-    return 'Done!'
-
-
 # http://127.0.0.1:5000/ffmpy
 @app.route('/ffmpy')
 def ffmpy():

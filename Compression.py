@@ -23,7 +23,7 @@ class Video(object):
             if var > 0:
                 time.sleep(var)
             return jpeg.tobytes(), success
-        return None, success
+         return None, success
 
 
 # using requests to capture video via smartphone with IPWebcam
