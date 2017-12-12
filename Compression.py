@@ -23,7 +23,7 @@ class Video(object):
             if var > 0:
                 time.sleep(var)
             return jpeg.tobytes(), success
-         return None, success
+        return None, success
 
 
 # using requests to capture video via smartphone with IPWebcam
@@ -51,6 +51,22 @@ class CompressedVideoWriter(object):
 
     def write_video(self):
         self.writer.write(self.video)
+
+
+class WebCam(object):
+
+    def __init__(self):
+        self.video = cv2.VideoCapture(0)
+
+    def __del__(self):
+        self.video.release()
+
+    def get_frame(self):
+        success, image = self.video.read()
+        if success:
+            ret, jpeg = cv2.imencode('.jpg', image)
+            return jpeg.tobytes(), success
+        return None, success
 
 
 def gen(video):
