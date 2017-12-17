@@ -1,5 +1,6 @@
 import Compression as compression
 from flask import Flask, Response
+import Compare
 
 app = Flask(__name__)
 
@@ -17,28 +18,6 @@ def video_feed():
     return res
 
 
-# http://127.0.0.1:5000/ip_camera
-@app.route('/ip_camera')
-def camera():
-    res = Response(compression.gen(compression.IPCamVideo()),
-                   mimetype='multipart/x-mixed-replace; boundary=frame')
-    return res
-
-
-# http://127.0.0.1:5000/video_write
-@app.route('/video_write')
-def video_write():
-    compression.cap_and_write(compression.CompressedVideoWriter())
-    return 'Done!'
-
-
-# http://127.0.0.1:5000/ffmpy
-@app.route('/ffmpy')
-def ffmpy():
-    compression.comp_ffmpy()
-    return 'Done!'
-
-
 # http://127.0.0.1:5000/web_camera
 @app.route('/web_camera')
 def web_camera():
@@ -46,5 +25,14 @@ def web_camera():
                    mimetype='multipart/x-mixed-replace; boundary=frame')
     return res
 
+
+# http://127.0.0.1:5000/compare
+@app.route('/compare')
+def compare():
+    res = Response(Compare.gen(Compare.Compare()))
+    return res
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    # app.run(host='0.0.0.0', threaded=True)
+    app.run()
