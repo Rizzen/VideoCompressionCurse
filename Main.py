@@ -1,5 +1,6 @@
 import Compression as compression
 from flask import Flask, Response
+import Compare
 
 app = Flask(__name__)
 
@@ -25,5 +26,13 @@ def web_camera():
     return res
 
 
+# http://127.0.0.1:5000/compare
+@app.route('/compare')
+def compare():
+    res = Response(Compare.gen(Compare.Compare()))
+    return res
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    # app.run(host='0.0.0.0', threaded=True)
+    app.run()

@@ -1,5 +1,6 @@
 import cv2
 import time
+import Comparer
 
 
 # Opens video and shows it in browser
@@ -14,8 +15,10 @@ class Video(object):
     def get_frame(self):
         current_time = time.time()
         success, image = self.video.read()
+
         if success:
-            ret, jpeg = cv2.imencode('.jpg', image)
+            ret, jpeg = cv2.imencode('.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 50])
+
             var = 0.04 - (time.time() - current_time)
             if var > 0:
                 time.sleep(var)
